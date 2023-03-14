@@ -1,34 +1,42 @@
-递归：一个函数，直接或间接的调用自己，称为递归。
+//递归法求给定数据全排列
 
-"输入一个互不相同的字符，求改字符的全排列。
-
-1:创建一个字符数组，输入一串字符。
-2:排第一个位置，有N个选择。依次为N-个，直到最后一个字符。(N(N-1))
-3:选择一个排了后，进入下一层，直到排完本轮的N个数。然后进入下一次循环
-4:
-
-
-#include<iostream>
 #include<stdio.h>
-using namespace std;
-
-int main(){
-
-char str[n];
-
-for(int i=0; i<n;i++){
-
-
-
+ 
+void Swap(int& a, int& b)/*交换函数，将a和b的值互换*/
+{
+	int c = a;
+	a = b;
+	b = c;
 }
-
-int recursion(int *n,){
-"指明我要操作的数组"
-for(int i=0;i<n;i++){
-cout<<&n<<;
-n+1;
+ 
+ //全排列递归算法
+void Perm(int* br, int k, int m)
+                                //k代表递归层数，就是现在排第几个数了，m表示数组的长度。
+                                /*br代表要进行全排列的数组，k~m代表这个数组中要进行全排列数字的范围*/
+{
+	if (k == m)
+	{
+		for (int i = 0; i <= m; ++i)
+		{
+			printf("%d ", br[i]);
+		}
+		printf("\n");
+	}
+	else
+	{
+		for (int j = k; j <= m; ++j)
+		{
+			Swap(br[j], br[k]);
+			Perm(br, k + 1, m);
+			Swap(br[j], br[k]);
+		}
+	}
 }
-}
-
-
+ 
+int main()
+{
+	int ar[] = { 1,2,3 };
+	int n = sizeof(ar) / sizeof(ar[0]);
+	Perm(ar, 0, n - 1);
+	return 0;
 }
